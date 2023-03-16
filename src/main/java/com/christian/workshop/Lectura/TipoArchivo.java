@@ -1,5 +1,8 @@
-package com.christian.workshop;
+package com.christian.workshop.Lectura;
 
+import com.christian.workshop.Lectura.LectorArchivo;
+import com.christian.workshop.Lectura.LectorCSV;
+import com.christian.workshop.Lectura.LectorExcel;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;

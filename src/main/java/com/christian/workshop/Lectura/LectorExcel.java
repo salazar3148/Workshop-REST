@@ -1,14 +1,16 @@
-package com.christian.workshop;
+package com.christian.workshop.Lectura;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.christian.workshop.Lectura.LectorArchivo;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.File;
 import java.io.FileInputStream;
 
 
-public class LectorExcel implements LectorArchivo{
+public class LectorExcel implements LectorArchivo {
     @Override
     public List leerArchivo(String ruta) {
         List<String[]> lineas = new ArrayList<>();

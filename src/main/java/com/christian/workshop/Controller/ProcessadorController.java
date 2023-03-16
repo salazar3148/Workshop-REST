@@ -1,5 +1,7 @@
-package com.christian.workshop;
+package com.christian.workshop.Controller;
 
+import com.christian.workshop.Modelo.Documento;
+import com.christian.workshop.Service.ProcessadorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

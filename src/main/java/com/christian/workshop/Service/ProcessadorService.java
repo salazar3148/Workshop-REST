@@ -1,4 +1,8 @@
-package com.christian.workshop;
+package com.christian.workshop.Service;
+import com.christian.workshop.Lectura.LectorArchivo;
+import com.christian.workshop.Modelo.Documento;
+import com.christian.workshop.Modelo.FileRequest;
+import com.christian.workshop.Lectura.TipoArchivo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -22,22 +26,18 @@ public class ProcessadorService {
         Documento doc = new Documento();
         List<String[]> lineas = leerArchivo(ruta);
         String extension = ruta.split("\\.")[1];
-
-        for(int i = 1; i < lineas.size(); i++) {
-            String[] linea = lineas.get(i);
-
-            FileRequest fileRequest = new FileRequest(linea, extension);
-            RestTemplate restTemplate = new RestTemplate();
-
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
-            HttpEntity<FileRequest> request = new HttpEntity<>(fileRequest, headers);
-
-            boolean response = restTemplate.postForObject("http://localhost:8090/validator/", request, Boolean.class);
-
-            if(response) doc.incrementarValidos();
-            else doc.incrementarNoValidos();
-        }
+        lineas.stream()
+                .skip(1)
+                .forEach(linea -> {
+                    FileRequest fileRequest = new FileRequest(linea, extension);
+                    RestTemplate restTemplate = new RestTemplate();
+                    HttpHeaders headers = new HttpHeaders();
+                    headers.setContentType(MediaType.APPLICATION_JSON);
+                    HttpEntity<FileRequest> request = new HttpEntity<>(fileRequest, headers);
+                    boolean response = restTemplate.postForObject("http://localhost:8090/validator/", request, Boolean.class);
+                    if(response)  doc.incrementarValidos();
+                    else doc.incrementarNoValidos();
+                });
         return doc;
     }
     public List leerArchivo(String ruta) {

@@ -1,4 +1,4 @@
-package com.christian.workshop;
+package com.christian.workshop.Lectura;
 import java.util.List;
 
 public interface LectorArchivo {

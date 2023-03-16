@@ -1,4 +1,4 @@
-package com.christian.workshop;
+package com.christian.workshop.Modelo;
 
 public class FileRequest {
     private String[] line;
