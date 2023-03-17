@@ -1,22 +1,26 @@
 package com.christian.workshop.Lectura;
 
-import com.christian.workshop.Lectura.LectorArchivo;
+import com.christian.workshop.Linea.LineaCSV;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.FileInputStream;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LectorCSV implements LectorArchivo {
     @Override
-    public List leerArchivo(String ruta) {
-        List<String[]> lineas = new ArrayList<>();
+    public List<LineaCSV> leerArchivo(String ruta) {
+        List<LineaCSV> lineas = new ArrayList<>();
         try {
-            BufferedReader br = new BufferedReader(new FileReader("src/main/resources/" + ruta));
-            String line;
-            while((line = br.readLine()) != null){
-                lineas.add(line.split(","));
-            }
+            FileInputStream inputStream = new FileInputStream("src/main/resources/" + ruta);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            lineas = reader.lines()
+                    .skip(1)
+                    .map(LineaCSV::new)
+                    .collect(Collectors.toList());
         } catch (Exception e){
             System.out.println(e);
         }

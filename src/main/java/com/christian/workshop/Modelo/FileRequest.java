@@ -1,19 +1,15 @@
 package com.christian.workshop.Modelo;
+import com.christian.workshop.Linea.Linea;
 
 public class FileRequest {
-    private String[] line;
-    private String fileType;
-
-    public FileRequest(String[] line, String fileType) {
+    private Linea line;
+    public FileRequest(){
+    }
+    public FileRequest(Linea line) {
         this.line = line;
-        this.fileType = fileType;
     }
-
-    public String[] getLine() {
+    public Linea getLine() {
         return line;
-    }
-    public String getFileType() {
-        return fileType;
     }
 
 }

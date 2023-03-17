@@ -1,5 +1,6 @@
 package com.christian.workshop.Service;
 import com.christian.workshop.Lectura.LectorArchivo;
+import com.christian.workshop.Linea.Linea;
 import com.christian.workshop.Modelo.Documento;
 import com.christian.workshop.Modelo.FileRequest;
 import com.christian.workshop.Lectura.TipoArchivo;
@@ -24,12 +25,11 @@ public class ProcessadorService {
 
     public Documento validarLineas(String ruta) {
         Documento doc = new Documento();
-        List<String[]> lineas = leerArchivo(ruta);
+        List<Linea> lineas = leerArchivo(ruta);
         String extension = ruta.split("\\.")[1];
         lineas.stream()
-                .skip(1)
                 .forEach(linea -> {
-                    FileRequest fileRequest = new FileRequest(linea, extension);
+                    FileRequest fileRequest = new FileRequest(linea);
                     RestTemplate restTemplate = new RestTemplate();
                     HttpHeaders headers = new HttpHeaders();
                     headers.setContentType(MediaType.APPLICATION_JSON);
