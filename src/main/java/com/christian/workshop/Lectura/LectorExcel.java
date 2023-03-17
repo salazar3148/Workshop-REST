@@ -12,8 +12,12 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.StreamSupport;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class LectorExcel implements LectorArchivo {
+
+    private static final Logger logger = LogManager.getLogger(LectorExcel.class);
     @Override
     public List leerArchivo(String ruta) {
         List<Linea> lineas = new ArrayList<>();
@@ -52,7 +56,7 @@ public class LectorExcel implements LectorArchivo {
                     })
                     .collect(Collectors.toList());
         } catch (Exception ex) {
-            System.out.println(ex);
+            logger.error("Error leyendo archivo de Excel", ex);
         }
         return lineas;
     }

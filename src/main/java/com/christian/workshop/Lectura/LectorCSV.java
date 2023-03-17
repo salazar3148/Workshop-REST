@@ -1,6 +1,8 @@
 package com.christian.workshop.Lectura;
 
 import com.christian.workshop.Linea.LineaCSV;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -11,6 +13,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class LectorCSV implements LectorArchivo {
+
+    private static final Logger logger = LogManager.getLogger(LectorCSV.class);
     @Override
     public List<LineaCSV> leerArchivo(String ruta) {
         List<LineaCSV> lineas = new ArrayList<>();
@@ -21,8 +25,8 @@ public class LectorCSV implements LectorArchivo {
                     .skip(1)
                     .map(LineaCSV::new)
                     .collect(Collectors.toList());
-        } catch (Exception e){
-            System.out.println(e);
+        } catch (Exception ex){
+            logger.error("Error leyendo archivo de Excel", ex);
         }
         return lineas;
     }
